@@ -27,6 +27,7 @@ import com.bioxx.tfc.Containers.Slots.SlotForShowOnly;
 import com.bioxx.tfc.Core.Player.PlayerInventory;
 import com.bioxx.tfc.Food.ItemFoodTFC;
 import com.bioxx.tfc.api.Interfaces.IFood;
+import com.bioxx.tfc.api.Food;
 
 //slotClick is based on https://github.com/Mr-J/AdvancedBackpackMod/blob/master/unrelated/slotClick%2BComments%2BRename%2BHelpers.java.txt
 
@@ -840,11 +841,9 @@ public class ContainerStall extends ContainerTFC
     
     private ItemStack splitFoodWeight(ItemStack itemStack)
     {
-        IFood food = (IFood)itemStack.getItem();
-        
         float newWeight;
         
-        newWeight = food.getFoodWeight(itemStack) / 2;
+        newWeight = Food.getWeight(itemStack) / 2;
         newWeight = 10 * (int)(newWeight / 10);
         
         if(newWeight == 0)
@@ -863,7 +862,7 @@ public class ContainerStall extends ContainerTFC
         
         if(isAll)
         {
-            playerWeight = food.getFoodWeight(playerItemStack);
+            playerWeight = Food.getWeight(playerItemStack);
             playerWeight = 10 * (int)(playerWeight / 10);
             
             if(playerWeight == 0)
@@ -872,7 +871,7 @@ public class ContainerStall extends ContainerTFC
         else
             playerWeight = 10;
         
-        float newSlotWeight = food.getFoodWeight(slotItemStack) + playerWeight;
+        float newSlotWeight = Food.getWeight(slotItemStack) + playerWeight;
         
         if(newSlotWeight > food.getFoodMaxWeight(slotItemStack))
             newSlotWeight = food.getFoodMaxWeight(slotItemStack);
@@ -888,9 +887,7 @@ public class ContainerStall extends ContainerTFC
         
         if(isAll)
         {
-            IFood food = (IFood)srcItemStack.getItem();
-
-            weight = food.getFoodWeight(srcItemStack);
+            weight = Food.getWeight(srcItemStack);
             weight = 10 * (int)(weight / 10);
             
             if(weight == 0)
@@ -934,7 +931,7 @@ public class ContainerStall extends ContainerTFC
             ItemStack newItemStack = goodItemStack.copy();
             
             if(newItemStack.getItem() instanceof IFood)
-                ItemFoodTFC.createTag(newItemStack, ((IFood)newItemStack.getItem()).getFoodWeight(newItemStack));
+                ItemFoodTFC.createTag(newItemStack, Food.getWeight(newItemStack));
 
             inventoryplayer.setItemStack(newItemStack);
             

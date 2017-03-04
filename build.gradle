@@ -16,7 +16,7 @@ buildscript {
 }
 
 configurations {
-  runtime.exclude group: "[1.7.10]TerraFirmaCraft-0.79.21.741"
+  runtime.exclude group: "[1.7.10]TerraFirmaCraft-0.79.29.922"
 }
 
 // define the properties file
